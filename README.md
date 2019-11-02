@@ -26,7 +26,7 @@ use namespace Nuxed\EventDispatcher;
 use namespace Nuxed\EventDispatcher\ListenerProvider;
 
 <<__EntryPoint>>
-async function main(): void {
+async function main(): Awaitable<void> {
   $provider = new ListenerProvider\ReifiedListenerProvider();
 
   $provider->listen<SomeEvent>(new SomeEventListener());

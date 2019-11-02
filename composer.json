@@ -1,7 +1,7 @@
 {
     "name": "nuxed/event-dispatcher",
     "type": "library",
-    "description": "Nuxed Event Dispatcher - Manage Environment variables with ease",
+    "description": "Nuxed Event Dispatcher",
     "license": "MIT",
     "authors": [
         {
