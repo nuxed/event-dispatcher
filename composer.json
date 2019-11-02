@@ -1,0 +1,36 @@
+{
+    "name": "nuxed/event-dispatcher",
+    "type": "library",
+    "description": "Nuxed Event Dispatcher - Manage Environment variables with ease",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "azjezz",
+            "email": "azjezz@protonmail.com"
+        },
+        {
+            "name": "Nuxed Community",
+            "homepage": "https://github.com/nuxed/event-dispatcher/graphs/contributors"
+        }
+    ],
+    "require": {
+        "hhvm": "^4.25",
+        "hhvm/hsl": "^4.25",
+        "his/container": "^0.1"
+    },
+    "require-dev": {
+        "facebook/fbexpect": "^2.7",
+        "hhvm/hacktest": "^1.6|^2.0",
+        "hhvm/hhast": "^4.25"
+    },
+    "scripts": {
+        "check": [
+            "@type-check",
+            "@lint",
+            "@test"
+        ],
+        "lint": "hhast-lint -v src/",
+        "test": "hacktest tests/",
+        "type-check": "hh_client src/"
+    }
+}
