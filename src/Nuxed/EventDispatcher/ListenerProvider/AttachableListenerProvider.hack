@@ -1,7 +1,7 @@
 namespace Nuxed\EventDispatcher\ListenerProvider;
 
 use namespace HH\Lib\C;
-use namespace Nuxed\EventDispatcher\{Event, EventListener};
+use namespace Nuxed\Contract\EventDispatcher\{Event, EventListener};
 
 /**
  * The `AttachableListenerProvider` is a built-in implementation for `IAttachableListenerProvider`

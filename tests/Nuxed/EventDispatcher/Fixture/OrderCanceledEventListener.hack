@@ -1,6 +1,6 @@
 namespace Nuxed\Test\EventDispatcher\Fixture;
 
-use namespace Nuxed\EventDispatcher\EventListener;
+use namespace Nuxed\Contract\EventDispatcher\EventListener;
 
 final class OrderCanceledEventListener
   implements EventListener\IEventListener<OrderCanceledEvent> {

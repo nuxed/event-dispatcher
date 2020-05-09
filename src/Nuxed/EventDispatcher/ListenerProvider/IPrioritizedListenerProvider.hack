@@ -1,6 +1,6 @@
 namespace Nuxed\EventDispatcher\ListenerProvider;
 
-use namespace Nuxed\EventDispatcher\{Event, EventListener};
+use namespace Nuxed\Contract\EventDispatcher\{Event, EventListener};
 
 /**
  * The `IPrioritizedListenerProvider` listener provider allows you to attach event listeners,
@@ -8,7 +8,7 @@ use namespace Nuxed\EventDispatcher\{Event, EventListener};
  *
  * Event listeners returned by `getListener($event)`, will be in the ordered by priority.
  *
- * @see Nuxed\EventDispatcher\ListenerProvider\IListenerProvider::getListeners()
+ * @see Nuxed\Contract\EventDispatcher\ListenerProvider\IListenerProvider::getListeners()
  */
 interface IPrioritizedListenerProvider extends IAttachableListenerProvider {
   /**

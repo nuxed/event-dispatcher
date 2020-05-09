@@ -50,23 +50,4 @@ class EventDispatcherTest extends HackTest\HackTest {
     await $dispatcher->dispatch<Fixture\OrderCanceledEvent>($event);
     expect($event->orderId)->toBeSame('foofoobarbazqux');
   }
-
-  public async function testErroredEvent(): Awaitable<void> {
-    $provider = new EventDispatcher\ListenerProvider\ReifiedListenerProvider();
-    $provider->listen<Fixture\OrderCreatedEvent>(
-      new Fixture\OrderCreatedEventListener(),
-    );
-    $provider->listen<
-      EventDispatcher\Event\ErrorEvent<Fixture\OrderCreatedEvent>,
-    >(
-      EventDispatcher\EventListener\callable(async ($event) ==> {
-        $event->getEvent()->orderId = 'caught';
-      }),
-    );
-    $dispatcher = new EventDispatcher\EventDispatcher($provider);
-    $event = new Fixture\OrderCreatedEvent('hello');
-    expect(() ==> $dispatcher->dispatch<Fixture\OrderCreatedEvent>($event))
-      ->toThrow(\Exception::class);
-    expect($event->orderId)->toBeSame('caught');
-  }
 }

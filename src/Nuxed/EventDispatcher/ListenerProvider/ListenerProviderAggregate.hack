@@ -1,6 +1,10 @@
 namespace Nuxed\EventDispatcher\ListenerProvider;
 
-use namespace Nuxed\EventDispatcher\{Event, EventListener};
+use namespace Nuxed\Contract\EventDispatcher\{
+  Event,
+  EventListener,
+  ListenerProvider,
+};
 
 /**
  * The `ListenerProviderAggregate` allows you to combine multiple listener providers,
@@ -8,8 +12,9 @@ use namespace Nuxed\EventDispatcher\{Event, EventListener};
  *
  * @see Nuxed\EventDispatcher\ListenerProviderAggregate::attach()
  */
-final class ListenerProviderAggregate implements IListenerProvider {
-  private vec<IListenerProvider> $providers = vec[];
+final class ListenerProviderAggregate
+  implements ListenerProvider\IListenerProvider {
+  private vec<ListenerProvider\IListenerProvider> $providers = vec[];
 
   /**
    * {@inheritdoc}
@@ -27,7 +32,7 @@ final class ListenerProviderAggregate implements IListenerProvider {
   /**
    * Attach a listener provider to the listeners aggregate.
    */
-  public function attach(IListenerProvider $provider): void {
+  public function attach(ListenerProvider\IListenerProvider $provider): void {
     $this->providers[] = $provider;
   }
 }

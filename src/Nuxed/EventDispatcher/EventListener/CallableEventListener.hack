@@ -1,12 +1,12 @@
 namespace Nuxed\EventDispatcher\EventListener;
 
-use namespace Nuxed\EventDispatcher\Event;
+use namespace Nuxed\Contract\EventDispatcher\{Event, EventListener};
 
 /**
  * Decorator defines a callable listener for an event.
  */
 final class CallableEventListener<T as Event\IEvent>
-  implements IEventListener<T> {
+  implements EventListener\IEventListener<T> {
   public function __construct(
     private (function(T): Awaitable<void>) $listener,
   ) {}

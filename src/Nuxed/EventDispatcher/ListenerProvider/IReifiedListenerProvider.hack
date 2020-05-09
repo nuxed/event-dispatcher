@@ -1,14 +1,18 @@
 namespace Nuxed\EventDispatcher\ListenerProvider;
 
-use namespace Nuxed\EventDispatcher\{Event, EventListener};
+use namespace Nuxed\Contract\EventDispatcher\{
+  Event,
+  EventListener,
+  ListenerProvider,
+};
 
 /**
  * The `IReifiedListenerProvider` uses reified generics features to determine the event type,
  * instead of recieving it as an argument.
  *
- * @see Nuxed\EventDispatcher\ListenerProvider\IListenerProvider::getListeners()
+ * @see Nuxed\Contract\EventDispatcher\ListenerProvider\IListenerProvider::getListeners()
  */
-interface IReifiedListenerProvider extends IListenerProvider {
+interface IReifiedListenerProvider extends ListenerProvider\IListenerProvider {
   /**
    * Attach a listener
    */

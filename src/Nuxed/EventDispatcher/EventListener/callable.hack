@@ -1,6 +1,6 @@
 namespace Nuxed\EventDispatcher\EventListener;
 
-use namespace Nuxed\EventDispatcher\Event;
+use namespace Nuxed\Contract\EventDispatcher\{Event, EventListener};
 
 /**
  * Helper function to create an event listener,
@@ -10,6 +10,6 @@ use namespace Nuxed\EventDispatcher\Event;
  */
 function callable<T as Event\IEvent>(
   (function(T): Awaitable<void>) $listener,
-): IEventListener<T> {
+): EventListener\IEventListener<T> {
   return new CallableEventListener($listener);
 }

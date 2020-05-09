@@ -1,22 +1,20 @@
 namespace Nuxed\EventDispatcher;
 
 use namespace HH\Lib;
-use namespace Nuxed\EventDispatcher\{Event, EventListener};
+use namespace Nuxed\Contract\EventDispatcher;
+use namespace Nuxed\Contract\EventDispatcher\{
+  Event,
+  EventListener,
+  ListenerProvider,
+};
 
-final class EventDispatcher implements IEventDispatcher {
+final class EventDispatcher implements EventDispatcher\IEventDispatcher {
   public function __construct(
     private ListenerProvider\IListenerProvider $listenerProvider,
   ) {}
 
   /**
    * Provide all relevant listeners with an event to process.
-   *
-   * If a Throwable is caught when executing the listener loop, it is cast
-   * to an ErrorEvent, and then the method calls itself with that instance,
-   * re-throwing the original Throwable on completion.
-   *
-   * In the case that a Throwable is caught for an ErrorEvent, we re-throw
-   * to prevent recursion.
    *
    * @template T as IEvent
    *
@@ -46,35 +44,11 @@ final class EventDispatcher implements IEventDispatcher {
           return;
         }
 
-        try {
-          await $listener->process($event);
-        } catch (\Exception $e) {
-          if ($event is Event\ErrorEvent<_>) {
-            throw new Exception\InvalidListenerException('');
-            throw $event->getException();
-          }
-
-          await $this->handleCaughtException<T>($e, $event, $listener);
-        }
+        await $listener->process($event);
       };
     }
 
     await $lastOperation;
     return $event;
-  }
-
-  private async function handleCaughtException<
-    <<__Enforceable>> reify T as Event\IEvent,
-  >(
-    \Exception $e,
-    T $event,
-    EventListener\IEventListener<T> $listener,
-  ): Awaitable<noreturn> {
-    await $this->dispatch<Event\ErrorEvent<T>>(
-      new Event\ErrorEvent<T>($event, $listener, $e),
-    );
-
-    // Re-throw the original exception, per the spec.
-    throw $e;
   }
 }

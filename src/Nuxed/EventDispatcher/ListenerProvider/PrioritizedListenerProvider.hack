@@ -1,7 +1,7 @@
 namespace Nuxed\EventDispatcher\ListenerProvider;
 
 use namespace HH\Lib\{C, Str, Vec};
-use namespace Nuxed\EventDispatcher\{Event, EventListener};
+use namespace Nuxed\Contract\EventDispatcher\{Event, EventListener};
 
 /**
  * The `PrioritizedListenerProvider` is a built-in implementation for `IPrioritizedListenerProvider`

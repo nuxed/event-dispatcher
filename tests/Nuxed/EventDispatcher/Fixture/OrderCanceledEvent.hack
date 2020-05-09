@@ -1,8 +1,9 @@
 namespace Nuxed\Test\EventDispatcher\Fixture;
 
-use namespace Nuxed\EventDispatcher;
+use namespace Nuxed\Contract\EventDispatcher;
 
-final class OrderCanceledEvent implements EventDispatcher\Event\IStoppableEvent {
+final class OrderCanceledEvent
+  implements EventDispatcher\Event\IStoppableEvent {
   public bool $handled = false;
 
   public function __construct(public string $orderId) {}

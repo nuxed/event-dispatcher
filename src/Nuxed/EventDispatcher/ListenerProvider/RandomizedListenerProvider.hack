@@ -1,7 +1,7 @@
 namespace Nuxed\EventDispatcher\ListenerProvider;
 
 use namespace HH\Lib\{C, Vec};
-use namespace Nuxed\EventDispatcher\{Event, EventListener};
+use namespace Nuxed\Contract\EventDispatcher\{Event, EventListener};
 
 /**
  * The `RandomizedListenerProvider` is a built-in implementation for `IRandomizedListenerProvider`

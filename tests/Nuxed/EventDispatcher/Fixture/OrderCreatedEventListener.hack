@@ -1,6 +1,6 @@
 namespace Nuxed\Test\EventDispatcher\Fixture;
 
-use namespace Nuxed\EventDispatcher\EventListener;
+use namespace Nuxed\Contract\EventDispatcher\EventListener;
 
 class OrderCreatedEventListener
   implements EventListener\IEventListener<OrderCreatedEvent> {

@@ -2,7 +2,7 @@ namespace Nuxed\EventDispatcher\ListenerProvider;
 
 use namespace HH\Lib\C;
 use namespace HH\ReifiedGenerics;
-use namespace Nuxed\EventDispatcher\{Event, EventListener};
+use namespace Nuxed\Contract\EventDispatcher\{Event, EventListener};
 
 /**
  * The `ReifiedListenerProvider` is a built-in implementation for `IReifiedListenerProvider`
