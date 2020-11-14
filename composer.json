@@ -14,14 +14,18 @@
         }
     ],
     "require": {
-        "hhvm": "^4.56",
-        "hhvm/hsl": "^4.40",
-        "nuxed/contract": "^1.1"
+        "hhvm": "^4.83",
+        "hhvm/hsl": "^4.41",
+        "nuxed/contract": "^1.2"
     },
     "require-dev": {
+        "facebook/difflib": "^1.1.1",
         "facebook/fbexpect": "^2.7",
-        "hhvm/hacktest": "^1.6|^2.0",
-        "hhvm/hhast": "^4.25"
+        "facebook/hh-clilib": "^2.5.2",
+        "hhvm/hacktest": "^2.0",
+        "hhvm/hhast": "^4.82.2",
+        "hhvm/hhvm-autoload": "^3.1.6",
+        "hhvm/type-assert": "^4.1.2"
     },
     "scripts": {
         "check": [
