@@ -2,11 +2,7 @@ namespace Nuxed\EventDispatcher;
 
 use namespace HH\Lib;
 use namespace Nuxed\Contract\EventDispatcher;
-use namespace Nuxed\Contract\EventDispatcher\{
-  Event,
-  EventListener,
-  ListenerProvider,
-};
+use namespace Nuxed\Contract\EventDispatcher\{Event, ListenerProvider};
 
 final class EventDispatcher implements EventDispatcher\IEventDispatcher {
   public function __construct(
