@@ -20,10 +20,9 @@ final class ListenerProviderAggregate
    * {@inheritdoc}
    */
   public async function getListeners<<<__Enforceable>> reify T as Event\IEvent>(
-    T $event,
   ): AsyncIterator<EventListener\IEventListener<T>> {
     foreach ($this->providers as $provider) {
-      foreach ($provider->getListeners<T>($event) await as $listener) {
+      foreach ($provider->getListeners<T>() await as $listener) {
         yield $listener;
       }
     }

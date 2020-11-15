@@ -18,40 +18,39 @@ final class PrioritizedListenerProvider
   /**
    * {@inheritdoc}
    */
-  public function listen<T as Event\IEvent>(
-    classname<T> $event,
+  public function listen<<<__Enforceable>> reify T as Event\IEvent>(
     EventListener\IEventListener<T> $listener,
     int $priority = 1,
   ): void {
+    $event_type = T::class;
     $priority = Str\format('%d.0', $priority);
     if (
       C\contains_key($this->listeners, $priority) &&
-      C\contains_key($this->listeners[$priority], $event) &&
-      C\contains($this->listeners[$priority][$event], $listener)
+      C\contains_key($this->listeners[$priority], $event_type) &&
+      C\contains($this->listeners[$priority][$event_type], $listener)
     ) {
       return;
     }
 
-    $priorityListeners = $this->listeners[$priority] ?? dict[];
-    $eventListeners = $priorityListeners[$event] ?? vec[];
-    $eventListeners[] = $listener;
-    $priorityListeners[$event] = $eventListeners;
+    $priority_listeners = $this->listeners[$priority] ?? dict[];
+    $event_listeners = $priority_listeners[$event_type] ?? vec[];
+    $event_listeners[] = $listener;
+    $priority_listeners[$event_type] = $event_listeners;
     /* HH_FIXME[4110] */
-    $this->listeners[$priority] = $priorityListeners;
+    $this->listeners[$priority] = $priority_listeners;
   }
 
   /**
    * {@inheritdoc}
    */
   public async function getListeners<<<__Enforceable>> reify T as Event\IEvent>(
-    T $event,
   ): AsyncIterator<EventListener\IEventListener<T>> {
     $priorities = Vec\keys($this->listeners)
       |> Vec\sort($$, ($a, $b) ==> $a <=> $b);
 
     foreach ($priorities as $priority) {
-      foreach ($this->listeners[$priority] as $eventName => $listeners) {
-        if (\is_a($event, $eventName)) {
+      foreach ($this->listeners[$priority] as $type => $listeners) {
+        if (T::class === $type || \is_subclass_of(T::class, $type)) {
           foreach ($listeners as $listener) {
             /* HH_FIXME[4110] */
             yield $listener;

@@ -17,23 +17,20 @@ class PrioritizedListenerProviderTest extends HackTest\HackTest {
       new Fixture\OrderCanceledEventListener('qux'),
     ];
     foreach ($listeners as $priority => $listener) {
-      $listenerProvider->listen(
-        Fixture\OrderCanceledEvent::class,
+      $listenerProvider->listen<Fixture\OrderCanceledEvent>(
         $listener,
         $priority,
       );
     }
-    $listenerProvider->listen(
-      Fixture\OrderCreatedEvent::class,
+    $listenerProvider->listen<Fixture\OrderCreatedEvent>(
       new Fixture\OrderCreatedEventListener(),
     );
 
     $event = new Fixture\OrderCanceledEvent('bar');
     $i = 0;
     foreach (
-      $listenerProvider->getListeners<Fixture\OrderCanceledEvent>(
-        $event,
-      ) await as $listener
+      $listenerProvider->getListeners<Fixture\OrderCanceledEvent>() await as
+        $listener
     ) {
       expect($listeners[$i])->toBeSame($listener);
       $i++;
@@ -45,20 +42,18 @@ class PrioritizedListenerProviderTest extends HackTest\HackTest {
   public async function testDuplicateListeners(): Awaitable<void> {
     $listenerProvider = new ListenerProvider\PrioritizedListenerProvider();
     $listener = new Fixture\OrderCanceledEventListener('foo');
-    $listenerProvider->listen(Fixture\OrderCanceledEvent::class, $listener);
-    $listenerProvider->listen(Fixture\OrderCanceledEvent::class, $listener);
-    $listenerProvider->listen(Fixture\OrderCanceledEvent::class, $listener);
-    $listenerProvider->listen(
-      Fixture\OrderCreatedEvent::class,
+    $listenerProvider->listen<Fixture\OrderCanceledEvent>($listener);
+    $listenerProvider->listen<Fixture\OrderCanceledEvent>($listener);
+    $listenerProvider->listen<Fixture\OrderCanceledEvent>($listener);
+    $listenerProvider->listen<Fixture\OrderCreatedEvent>(
       new Fixture\OrderCreatedEventListener(),
     );
 
     $event = new Fixture\OrderCanceledEvent('bar');
     $i = 0;
     foreach (
-      $listenerProvider->getListeners<Fixture\OrderCanceledEvent>(
-        $event,
-      ) await as $eventListener
+      $listenerProvider->getListeners<Fixture\OrderCanceledEvent>() await as
+        $eventListener
     ) {
       expect($listener)->toBeSame($eventListener);
       $i++;
@@ -81,8 +76,7 @@ class PrioritizedListenerProviderTest extends HackTest\HackTest {
     foreach ($data as $handler => $priorities) {
       foreach ($priorities as $prioritiy) {
         $listener = new Fixture\OrderCanceledEventListener($handler);
-        $listenerProvider->listen(
-          Fixture\OrderCanceledEvent::class,
+        $listenerProvider->listen<Fixture\OrderCanceledEvent>(
           $listener,
           $prioritiy,
         );
@@ -98,9 +92,8 @@ class PrioritizedListenerProviderTest extends HackTest\HackTest {
     $event = new Fixture\OrderCanceledEvent('id');
     $i = 0;
     foreach (
-      $listenerProvider->getListeners<Fixture\OrderCanceledEvent>(
-        $event,
-      ) await as $listener
+      $listenerProvider->getListeners<Fixture\OrderCanceledEvent>() await as
+        $listener
     ) {
       $listener as Fixture\OrderCanceledEventListener;
       expect($listener->append)->toBeSame($handlers[$i]);

@@ -14,8 +14,7 @@ interface IPrioritizedListenerProvider extends IAttachableListenerProvider {
   /**
    * Attach a listener with optional priority
    */
-  public function listen<T as Event\IEvent>(
-    classname<T> $event,
+  public function listen<<<__Enforceable>> reify T as Event\IEvent>(
     EventListener\IEventListener<T> $listener,
     int $priority = 1,
   ): void;

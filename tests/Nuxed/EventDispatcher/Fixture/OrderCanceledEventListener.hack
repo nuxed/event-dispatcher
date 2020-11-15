@@ -10,10 +10,14 @@ final class OrderCanceledEventListener
     private bool $handle = false,
   ) {}
 
-  public async function process(OrderCanceledEvent $event): Awaitable<void> {
+  public async function process(
+    OrderCanceledEvent $event,
+  ): Awaitable<OrderCanceledEvent> {
     $event->orderId .= $this->append;
     if ($this->handle) {
       $event->handled = true;
     }
+
+    return $event;
   }
 }

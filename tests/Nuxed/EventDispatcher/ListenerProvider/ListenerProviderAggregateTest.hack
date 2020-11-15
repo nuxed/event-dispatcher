@@ -10,9 +10,9 @@ class ListenerProviderAggregateTest extends HackTest\HackTest {
   public async function testAttachAndGetListeners(): Awaitable<void> {
     $aggregate = new ListenerProvider\ListenerProviderAggregate();
     $attachableProvider = new ListenerProvider\AttachableListenerProvider();
-    $reifiedProvider = new ListenerProvider\ReifiedListenerProvider();
+    $randomProvider = new ListenerProvider\RandomizedListenerProvider();
     $aggregate->attach($attachableProvider);
-    $aggregate->attach($reifiedProvider);
+    $aggregate->attach($randomProvider);
 
     $listeners = vec[
       new Fixture\OrderCanceledEventListener('foo'),
@@ -20,19 +20,17 @@ class ListenerProviderAggregateTest extends HackTest\HackTest {
       new Fixture\OrderCanceledEventListener('qux'),
     ];
     foreach ($listeners as $listener) {
-      $attachableProvider->listen(Fixture\OrderCanceledEvent::class, $listener);
-      $reifiedProvider->listen<Fixture\OrderCanceledEvent>($listener);
+      $attachableProvider->listen<Fixture\OrderCanceledEvent>($listener);
+      $randomProvider->listen<Fixture\OrderCanceledEvent>($listener);
     }
-    $attachableProvider->listen(
-      Fixture\OrderCreatedEvent::class,
+    $attachableProvider->listen<Fixture\OrderCreatedEvent>(
       new Fixture\OrderCreatedEventListener(),
     );
 
     $event = new Fixture\OrderCanceledEvent('bar');
     $i = 0;
     foreach (
-      $aggregate->getListeners<Fixture\OrderCanceledEvent>($event) await as
-        $listener
+      $aggregate->getListeners<Fixture\OrderCanceledEvent>() await as $listener
     ) {
       expect($listeners)->toContain($listener);
       $i++;

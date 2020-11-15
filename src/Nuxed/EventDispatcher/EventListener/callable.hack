@@ -9,7 +9,7 @@ use namespace Nuxed\Contract\EventDispatcher\{Event, EventListener};
  * @see Nuxed\EventDispatcher\EventListener\CallableEventListener
  */
 function callable<T as Event\IEvent>(
-  (function(T): Awaitable<void>) $listener,
+  (function(T): Awaitable<T>) $listener,
 ): EventListener\IEventListener<T> {
   return new CallableEventListener($listener);
 }

@@ -17,10 +17,9 @@ use namespace Nuxed\Contract\EventDispatcher\{
 interface IAttachableListenerProvider
   extends ListenerProvider\IListenerProvider {
   /**
-   * Attach a listener to the given event.
+   * Attach a listener to event of type T.
    */
-  public function listen<T as Event\IEvent>(
-    classname<T> $event,
+  public function listen<<<__Enforceable>> reify T as Event\IEvent>(
     EventListener\IEventListener<T> $listener,
   ): void;
 }

@@ -17,11 +17,11 @@ final class RandomizedListenerProvider implements IRandomizedListenerProvider {
   /**
    * {@inheritdoc}
    */
-  public function listen<T as Event\IEvent>(
-    classname<T> $event,
+  public function listen<<<__Enforceable>> reify T as Event\IEvent>(
     EventListener\IEventListener<T> $listener,
   ): void {
-    $listeners = $this->listeners[$event] ?? vec[];
+    $event_type = T::class;
+    $listeners = $this->listeners[$event_type] ?? vec[];
     if (C\contains($listeners, $listener)) {
       // duplicate detected
       return;
@@ -29,18 +29,17 @@ final class RandomizedListenerProvider implements IRandomizedListenerProvider {
 
     $listeners[] = $listener;
     /* HH_FIXME[4110] */
-    $this->listeners[$event] = $listeners;
+    $this->listeners[$event_type] = $listeners;
   }
 
   /**
    * {@inheritdoc}
    */
   public async function getListeners<<<__Enforceable>> reify T as Event\IEvent>(
-    T $event,
   ): AsyncIterator<EventListener\IEventListener<T>> {
     $listeners = vec[];
     foreach ($this->listeners as $type => $eventListeners) {
-      if (\is_a($event, $type)) {
+      if (T::class === $type || \is_subclass_of(T::class, $type)) {
         $listeners = Vec\concat($listeners, $eventListeners);
       }
     }

@@ -15,19 +15,17 @@ class RandomizedListenerProviderTest extends HackTest\HackTest {
       new Fixture\OrderCanceledEventListener('qux'),
     ];
     foreach ($listeners as $listener) {
-      $listenerProvider->listen(Fixture\OrderCanceledEvent::class, $listener);
+      $listenerProvider->listen<Fixture\OrderCanceledEvent>($listener);
     }
-    $listenerProvider->listen(
-      Fixture\OrderCreatedEvent::class,
+    $listenerProvider->listen<Fixture\OrderCreatedEvent>(
       new Fixture\OrderCreatedEventListener(),
     );
 
     $event = new Fixture\OrderCanceledEvent('bar');
     $i = 0;
     foreach (
-      $listenerProvider->getListeners<Fixture\OrderCanceledEvent>(
-        $event,
-      ) await as $listener
+      $listenerProvider->getListeners<Fixture\OrderCanceledEvent>() await as
+        $listener
     ) {
       $i++;
     }
@@ -38,20 +36,18 @@ class RandomizedListenerProviderTest extends HackTest\HackTest {
   public async function testDuplicateListeners(): Awaitable<void> {
     $listenerProvider = new ListenerProvider\RandomizedListenerProvider();
     $listener = new Fixture\OrderCanceledEventListener('foo');
-    $listenerProvider->listen(Fixture\OrderCanceledEvent::class, $listener);
-    $listenerProvider->listen(Fixture\OrderCanceledEvent::class, $listener);
-    $listenerProvider->listen(Fixture\OrderCanceledEvent::class, $listener);
-    $listenerProvider->listen(
-      Fixture\OrderCreatedEvent::class,
+    $listenerProvider->listen<Fixture\OrderCanceledEvent>($listener);
+    $listenerProvider->listen<Fixture\OrderCanceledEvent>($listener);
+    $listenerProvider->listen<Fixture\OrderCanceledEvent>($listener);
+    $listenerProvider->listen<Fixture\OrderCreatedEvent>(
       new Fixture\OrderCreatedEventListener(),
     );
 
     $event = new Fixture\OrderCanceledEvent('bar');
     $i = 0;
     foreach (
-      $listenerProvider->getListeners<Fixture\OrderCanceledEvent>(
-        $event,
-      ) await as $eventListener
+      $listenerProvider->getListeners<Fixture\OrderCanceledEvent>() await as
+        $eventListener
     ) {
       expect($listener)->toBeSame($eventListener);
       $i++;

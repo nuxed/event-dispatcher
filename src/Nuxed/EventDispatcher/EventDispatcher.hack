@@ -23,28 +23,27 @@ final class EventDispatcher implements EventDispatcher\IEventDispatcher {
       return $event;
     }
 
-    $listeners = $this->listenerProvider->getListeners<T>($event);
-    $stopped = new Lib\Ref(false);
+    $listeners = $this->listenerProvider->getListeners<T>();
+    // we need to provide <T> to Lib\Ref as the object will be modified.
+    // $event (type: Ti) can be a subtype of T, and $listener->process() can return
+    // another subtype of T (type: To), which would result in a type error, because
+    // we cannot assign type To to Lib\Ref::$value of type Ti.
+    $event = new Lib\Ref<T>($event);
     $lastOperation = async {
     };
 
     foreach ($listeners await as $listener) {
-      if ($stopped->value) {
-        break;
-      }
-
       $lastOperation = async {
         await $lastOperation;
-        if ($event is Event\IStoppableEvent && $event->isPropagationStopped()) {
-          $stopped->value = true;
+        if ($event->value is Event\IStoppableEvent && $event->value->isPropagationStopped()) {
           return;
         }
 
-        await $listener->process($event);
+        $event->value = await $listener->process($event->value);
       };
     }
 
     await $lastOperation;
-    return $event;
+    return $event->value;
   }
 }

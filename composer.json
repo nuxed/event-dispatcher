@@ -16,7 +16,7 @@
     "require": {
         "hhvm": "^4.83",
         "hhvm/hsl": "^4.41",
-        "nuxed/contract": "^1.2"
+        "nuxed/contract": "^2.0"
     },
     "require-dev": {
         "facebook/difflib": "^1.1.1",
