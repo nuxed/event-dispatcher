@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "83f806fb815d7ae8bf2dccc8a8d2974a",
+    "content-hash": "72840de2f9a1e3f2cf9ab6bd31aa80ba",
     "packages": [
         {
             "name": "hhvm/hsl",
@@ -95,16 +95,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nuxed/contract.git",
-                "reference": "58daf55f10651038a4c4036a0572d0a40f279275"
+                "reference": "0a50f020819bd34fe8b708469c310656ab6cde52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nuxed/contract/zipball/58daf55f10651038a4c4036a0572d0a40f279275",
-                "reference": "58daf55f10651038a4c4036a0572d0a40f279275",
+                "url": "https://api.github.com/repos/nuxed/contract/zipball/0a50f020819bd34fe8b708469c310656ab6cde52",
+                "reference": "0a50f020819bd34fe8b708469c310656ab6cde52",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.83",
+                "hhvm": "~4.83.1 || ~4.84.0",
                 "hhvm/hsl": "^4.41",
                 "hhvm/hsl-experimental": "^4.66"
             },
@@ -135,7 +135,7 @@
                 "issues": "https://github.com/nuxed/contract/issues",
                 "source": "https://github.com/nuxed/contract/tree/v2.0.0"
             },
-            "time": "2020-11-14T23:59:29+00:00"
+            "time": "2020-11-15T01:21:09+00:00"
         }
     ],
     "packages-dev": [
@@ -460,7 +460,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "^4.83"
+        "hhvm": "~4.83.1 || ~4.84.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
