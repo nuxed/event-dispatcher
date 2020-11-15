@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "facebook/difflib": "^1.1.1",
-        "facebook/fbexpect": "^2.7",
+        "facebook/fbexpect": "^2.7.7",
         "facebook/hh-clilib": "^2.5.2",
         "hhvm/hacktest": "^2.0",
         "hhvm/hhast": "^4.82.2",
