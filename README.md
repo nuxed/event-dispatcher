@@ -30,7 +30,7 @@ use namespace Nuxed\EventDispatcher\ListenerProvider;
 
 <<__EntryPoint>>
 async function main(): Awaitable<void> {
-  $provider = new ListenerProvider\ReifiedListenerProvider();
+  $provider = new ListenerProvider\AttachableListenerProvider();
 
   $provider->listen<SomeEvent>(new SomeEventListener());
   $provider->listen<SomeOtherEvent>(new SomeOtherEventListener());
