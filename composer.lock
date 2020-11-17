@@ -91,20 +91,20 @@
         },
         {
             "name": "nuxed/contract",
-            "version": "v2.0.0",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nuxed/contract.git",
-                "reference": "0a50f020819bd34fe8b708469c310656ab6cde52"
+                "reference": "1f41a09f722ed427e9a3461502b44faeeda074d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nuxed/contract/zipball/0a50f020819bd34fe8b708469c310656ab6cde52",
-                "reference": "0a50f020819bd34fe8b708469c310656ab6cde52",
+                "url": "https://api.github.com/repos/nuxed/contract/zipball/1f41a09f722ed427e9a3461502b44faeeda074d7",
+                "reference": "1f41a09f722ed427e9a3461502b44faeeda074d7",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "~4.83.1 || ~4.84.0",
+                "hhvm": "~4.83.1 || ~4.84.0 || ~4.85.0",
                 "hhvm/hsl": "^4.41",
                 "hhvm/hsl-experimental": "^4.66"
             },
@@ -133,9 +133,9 @@
             "description": "Nuxed Contract",
             "support": {
                 "issues": "https://github.com/nuxed/contract/issues",
-                "source": "https://github.com/nuxed/contract/tree/v2.0.0"
+                "source": "https://github.com/nuxed/contract/tree/v2.1.0"
             },
-            "time": "2020-11-15T01:21:09+00:00"
+            "time": "2020-11-17T21:20:45+00:00"
         }
     ],
     "packages-dev": [
